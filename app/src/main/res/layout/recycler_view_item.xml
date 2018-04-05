@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:clickable="true"
         android:focusable="true"
-        card_view:cardBackgroundColor="#686666"
+        card_view:cardBackgroundColor="#c9c8c8"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:cardCornerRadius="4dp">
 

@@ -1,15 +1,20 @@
 package com.android.jyang.recyclerview.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.jyang.recyclerview.R;
+import com.android.jyang.recyclerview.activities.MainActivity;
 import com.android.jyang.recyclerview.models.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -26,13 +31,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
+    private Activity activity;
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Movie> movies, int layout, OnItemClickListener listener) {
+    public MyAdapter(List<Movie> movies, int layout, Activity activity, OnItemClickListener listener) {
         this.movies = movies;
         this.layout = layout;
         this.itemClickListener = listener;
+        this.activity = activity;
     }
 
     // Create new views (invoked by the layout manager)
@@ -64,7 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener{
         // each data item is just a string in this case
 //        public TextView name;
         public TextView textView;
@@ -77,6 +84,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             textView = (TextView) itemView.findViewById(R.id.textViewTitle);
             imageViewPoster = (ImageView) itemView.findViewById(R.id.imageViewPoster);
+            // activity registerForContextMenu
+            itemView.setOnCreateContextMenuListener(this);
         }
 
         public void bind(final Movie movie, final OnItemClickListener listener) {
@@ -86,7 +95,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             Picasso.get().load(movie.getPoster()).fit().into(imageViewPoster);
 //            imageViewPoster.setImageResource(movie.getPoster());
 
-            cardView.setOnClickListener(new View.OnClickListener() {
+            imageViewPoster.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(movie, getAdapterPosition());
@@ -94,6 +103,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             });
         }
 
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.delete_item:
+                    movies.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            Movie movie = movies.get(this.getAdapterPosition());
+            contextMenu.setHeaderTitle(movie.getName());
+            MenuInflater inflater = activity.getMenuInflater();
+            inflater.inflate(R.menu.context_menu, contextMenu);
+            for (int i= 0; i < contextMenu.size(); i++) {
+                contextMenu.getItem(i).setOnMenuItemClickListener(this);
+            }
+        }
     }
 
 

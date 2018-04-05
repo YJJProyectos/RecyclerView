@@ -3,6 +3,7 @@ package com.android.jyang.recyclerview.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -45,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         movies = this.getMovies();
 
 //        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        layoutManager = new LinearLayoutManager(this);
-//        layoutManager = new GridLayoutManager(this, 2);
+//        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 2);
 //        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL );
 
         recyclerView.setLayoutManager(layoutManager);
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        adapter = new MyAdapter(movies, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
+        adapter = new MyAdapter(movies, R.layout.recycler_view_item, this, new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie, int position) {
                 Toast.makeText(MainActivity.this, "Touch " + movie.getName() , Toast.LENGTH_SHORT).show();
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        registerForContextMenu(recyclerView);
+//        registerForContextMenu(recyclerView);
 
     }
 
@@ -105,34 +106,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Inflamos el layout del context menu
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//        menu.setHeaderTitle(movies.get(info.position).getName());
-        inflater.inflate(R.menu.context_menu, menu);
-
-
-    }
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater inflater = getMenuInflater();
+//
+////        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+////        menu.setHeaderTitle(movies.get(info.position).getName());
+//        inflater.inflate(R.menu.context_menu, menu);
+//
+//
+//    }
 
     // Manejamos eventos click en el context menu
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
-        switch (item.getItemId()) {
-            case R.id.delete_item:
-                // obtenemos la position de la lista a borrar
-                this.movies.remove(info.position);
-                this.adapter.notifyDataSetChanged();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//
+//        switch (item.getItemId()) {
+//            case R.id.delete_item:
+//                // obtenemos la position de la lista a borrar
+//                this.movies.remove(info.position);
+//                this.adapter.notifyDataSetChanged();
+//                return true;
+//            default:
+//                return super.onContextItemSelected(item);
+//        }
+//    }
 
 
     private void addMovie(int position) {
