@@ -1,5 +1,6 @@
 package com.android.jyang.recyclerview.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setTitle("Recycler View - Card View");
+        getSupportActionBar().setTitle("Recycler-Card View");
 
         ButterKnife.bind(this);
 
@@ -110,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 this.recyclerView.setLayoutManager(this.layoutManager);
 //                Toast.makeText(this, "posicion " , Toast.LENGTH_SHORT).show();
                 this.recyclerView.setAdapter(this.adapter);
+                return true;
+            case R.id.menu_home:
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

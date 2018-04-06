@@ -4,12 +4,20 @@
 
     <item
         android:id="@+id/add_name"
-        android:title="ADD"
         android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="ifRoom"></item>
+        android:title="ADD"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/cambiarGrilla"
         android:icon="?android:attr/actionModePasteDrawable"
-        android:title="cambiarGrilla"
-        app:showAsAction="ifRoom"></item>
+        android:title="Cambiar Grilla"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:title="Home"></item>
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Cerrar Sesion"></item>
 </menu>
