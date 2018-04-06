@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         movies = this.getMovies();
 
 //        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-//        layoutManager = new LinearLayoutManager(this);
-        layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new LinearLayoutManager(this);
+//        layoutManager = new GridLayoutManager(this, 2);
 //        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL );
 
         recyclerView.setLayoutManager(layoutManager);
