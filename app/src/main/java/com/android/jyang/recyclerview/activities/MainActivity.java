@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private int counter = 0;
+    private boolean estaCambiado = false;
+    private final RecyclerView.LayoutManager layoutLinear = new LinearLayoutManager(this);
+    private final RecyclerView.LayoutManager layoutGrid2 = new GridLayoutManager(this, 2);
 
 
     @Override
@@ -47,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
         movies = this.getMovies();
 
 //        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        layoutManager = new LinearLayoutManager(this);
+//        layoutManager = new LinearLayoutManager(this);
 //        layoutManager = new GridLayoutManager(this, 2);
 //        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL );
 
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutLinear);
 
 //        adapter = new MyAdapter(names, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
 //            @Override
@@ -99,7 +102,19 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.add_name:
-                this.addMovie(this.movies.size() );
+                this.addMovie(this.movies.size());
+                return true;
+            case R.id.cambiarGrilla:
+                Toast.makeText(this, "cambiar grilla", Toast.LENGTH_SHORT).show();
+                if (estaCambiado) {
+                    this.layoutManager = this.layoutLinear;
+                    estaCambiado = false;
+                } else {
+                    this.layoutManager = this.layoutGrid2;
+                    estaCambiado = true;
+                }
+                this.recyclerView.setLayoutManager(this.layoutManager);
+                this.layoutManager.scrollToPosition(1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

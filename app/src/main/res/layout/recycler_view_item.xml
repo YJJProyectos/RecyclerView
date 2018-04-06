@@ -39,12 +39,19 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
                 android:layout_height="match_parent"
-                android:background="#944444">
+                android:background="#944444"
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/textTest"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:text="TEST"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textTest2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="TEST2"
                     android:textAlignment="center" />
             </LinearLayout>
         </LinearLayout>
