@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.jyang.recyclerview.models.Movie;
@@ -141,10 +142,10 @@ public class MainActivity extends AppCompatActivity {
         movies.add(position, new Movie("Nueva Imagen " + (++counter), R.drawable.newmovie ));
         adapter.notifyItemInserted(position);
         layoutManager.scrollToPosition(position);
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     private void removeMovie(int position) {

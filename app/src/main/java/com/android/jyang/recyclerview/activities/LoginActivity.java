@@ -3,6 +3,7 @@ package com.android.jyang.recyclerview.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     Switch guardarView;
     @BindView(R.id.login)
     Button login;
+    @BindView(R.id.launch)
+    Button botonLaunch;
     private SharedPreferences prefs;
 
     @Override
@@ -39,6 +42,13 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mailView.setText(prefs.getString("mail", ""));
         pwdView.setText(prefs.getString("pwd",""));
+        botonLaunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent("android.intent.action.VIEW", Uri.parse("http://www.example.com"));
+                startActivity(i);
+            }
+        });
     }
 
     public void login(View view) {
