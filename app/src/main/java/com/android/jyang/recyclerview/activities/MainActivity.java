@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
 //        layoutManager = new LinearLayoutManager(this);
 //        layoutManager = new GridLayoutManager(this, 2);
 //        layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL );
-
-        recyclerView.setLayoutManager(layoutLinear);
+        this.layoutManager = layoutLinear;
+        recyclerView.setLayoutManager(this.layoutManager);
 
 //        adapter = new MyAdapter(names, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
 //            @Override
@@ -151,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+
+    public void borrarTodos(View view) {
+        int tamanio = this.movies.size();
+        for (int i = 0; i < tamanio; i++) {
+            removeMovie(0);
+        }
+    }
 
     private void addMovie(int position) {
         int PICK_IMAGE = 1;
