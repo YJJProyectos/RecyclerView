@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 this.addMovie(this.movies.size());
                 return true;
             case R.id.cambiarGrilla:
-                Toast.makeText(this, "cambiar grilla", Toast.LENGTH_SHORT).show();
                 if (estaCambiado) {
                     this.layoutManager = this.layoutLinear;
                     estaCambiado = false;
@@ -114,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
                     estaCambiado = true;
                 }
                 this.recyclerView.setLayoutManager(this.layoutManager);
-                this.layoutManager.scrollToPosition(1);
+//                Toast.makeText(this, "posicion " , Toast.LENGTH_SHORT).show();
+                this.recyclerView.setAdapter(this.adapter);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -157,15 +157,10 @@ public class MainActivity extends AppCompatActivity {
         movies.add(position, new Movie("Nueva Imagen " + (++counter), R.drawable.newmovie ));
         adapter.notifyItemInserted(position);
         layoutManager.scrollToPosition(position);
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     private void removeMovie(int position) {
         movies.remove(position);
         adapter.notifyItemRemoved(position);
-//        layoutManager.scrollToPosition(position);
     }
 }
