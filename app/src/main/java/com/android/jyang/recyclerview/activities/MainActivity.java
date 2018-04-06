@@ -1,21 +1,16 @@
 package com.android.jyang.recyclerview.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.jyang.recyclerview.models.Movie;
+import com.android.jyang.recyclerview.models.Item;
 import com.android.jyang.recyclerview.adapters.MyAdapter;
 import com.android.jyang.recyclerview.R;
 
@@ -27,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Movie> movies;
+    private List<Item> items;
     @BindView(R.id.my_recycler_view)  RecyclerView recyclerView;
 //    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -47,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        movies = this.getMovies();
+        items = this.getItems();
 
 //        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 //        layoutManager = new LinearLayoutManager(this);
@@ -60,15 +55,15 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onItemClick(String name, int position) {
 //                Toast.makeText(MainActivity.this, name + " - " + position, Toast.LENGTH_SHORT).show();
-//                removeMovie(position);
+//                removeItem(position);
 //            }
 //        });
 
-        adapter = new MyAdapter(movies, R.layout.recycler_view_item, this, new MyAdapter.OnItemClickListener() {
+        adapter = new MyAdapter(items, R.layout.recycler_view_item, this, new MyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Movie movie, int position) {
-                Toast.makeText(MainActivity.this, "Touch " + movie.getName() , Toast.LENGTH_SHORT).show();
-//                removeMovie(position);
+            public void onItemClick(Item item, int position) {
+                Toast.makeText(MainActivity.this, "Touch " + item.getName() , Toast.LENGTH_SHORT).show();
+//                removeItem(position);
             }
         });
 //        recyclerView.setHasFixedSize(true);
@@ -79,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<Movie> getMovies() {
-        return new ArrayList<Movie>() {{
-            add(new Movie("Manzana",R.drawable.apple_bg));
-            add(new Movie("Banana", R.drawable.banana_bg));
-            add(new Movie("Cereza", R.drawable.cherry_bg));
-            add(new Movie("Frutilla", R.drawable.strawberry_bg));
-            add(new Movie("Mora", R.drawable.raspberry_bg));
-            add(new Movie("Ciruela", R.drawable.plum_bg));
-            add(new Movie("Pera", R.drawable.pear_bg));
+    private List<Item> getItems() {
+        return new ArrayList<Item>() {{
+            add(new Item("Manzana",R.drawable.apple_bg));
+            add(new Item("Banana", R.drawable.banana_bg));
+            add(new Item("Cereza", R.drawable.cherry_bg));
+            add(new Item("Frutilla", R.drawable.strawberry_bg));
+            add(new Item("Mora", R.drawable.raspberry_bg));
+            add(new Item("Ciruela", R.drawable.plum_bg));
+            add(new Item("Pera", R.drawable.pear_bg));
         }};
     }
 
@@ -102,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.add_name:
-                this.addMovie(this.movies.size());
+                this.addItem(this.items.size());
                 return true;
             case R.id.cambiarGrilla:
                 if (estaCambiado) {
@@ -128,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 //        MenuInflater inflater = getMenuInflater();
 //
 ////        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-////        menu.setHeaderTitle(movies.get(info.position).getName());
+////        menu.setHeaderTitle(items.get(info.position).getName());
 //        inflater.inflate(R.menu.context_menu, menu);
 //
 //
@@ -143,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 //        switch (item.getItemId()) {
 //            case R.id.delete_item:
 //                // obtenemos la position de la lista a borrar
-//                this.movies.remove(info.position);
+//                this.items.remove(info.position);
 //                this.adapter.notifyDataSetChanged();
 //                return true;
 //            default:
@@ -153,21 +148,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void borrarTodos(View view) {
-        int tamanio = this.movies.size();
+        int tamanio = this.items.size();
         for (int i = 0; i < tamanio; i++) {
-            removeMovie(0);
+            removeItem(0);
         }
     }
 
-    private void addMovie(int position) {
+    private void addItem(int position) {
         int PICK_IMAGE = 1;
-        movies.add(position, new Movie("Nueva Imagen " + (++counter), R.drawable.newmovie ));
+        items.add(position, new Item("Nueva Imagen " + (++counter), R.drawable.newmovie ));
         adapter.notifyItemInserted(position);
         layoutManager.scrollToPosition(position);
     }
 
-    private void removeMovie(int position) {
-        movies.remove(position);
+    private void removeItem(int position) {
+        items.remove(position);
         adapter.notifyItemRemoved(position);
     }
 }

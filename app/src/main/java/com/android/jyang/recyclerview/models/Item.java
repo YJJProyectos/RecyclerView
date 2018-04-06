@@ -4,16 +4,16 @@ package com.android.jyang.recyclerview.models;
  * Created by jyang on 3/4/2018.
  */
 
-public class Movie {
+public class Item {
 
     public String name;
     public int poster;
 
-    public Movie() {
+    public Item() {
 
     }
 
-    public Movie(String name, int poster) {
+    public Item(String name, int poster) {
         this.name = name;
         this.poster = poster;
     }

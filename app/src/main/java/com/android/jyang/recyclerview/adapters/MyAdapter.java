@@ -14,8 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.jyang.recyclerview.R;
-import com.android.jyang.recyclerview.activities.MainActivity;
-import com.android.jyang.recyclerview.models.Movie;
+import com.android.jyang.recyclerview.models.Item;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private String[] mDataset;
-    private List<Movie> movies;
+    private List<Item> items;
     private int layout;
     private OnItemClickListener itemClickListener;
     private Context context;
@@ -35,8 +34,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Movie> movies, int layout, Activity activity, OnItemClickListener listener) {
-        this.movies = movies;
+    public MyAdapter(List<Item> items, int layout, Activity activity, OnItemClickListener listener) {
+        this.items = items;
         this.layout = layout;
         this.itemClickListener = listener;
         this.activity = activity;
@@ -55,17 +54,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.bind(movies.get(position), itemClickListener);
+        holder.bind(items.get(position), itemClickListener);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return movies.size();
+        return items.size();
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Movie movie, int position);
+        void onItemClick(Item item, int position);
     }
 
     // Provide a reference to the views for each data item
@@ -88,17 +87,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             itemView.setOnCreateContextMenuListener(this);
         }
 
-        public void bind(final Movie movie, final OnItemClickListener listener) {
+        public void bind(final Item item, final OnItemClickListener listener) {
 
 //            this.name.setText(name);
-            textView.setText(movie.getName());
-            Picasso.get().load(movie.getPoster()).fit().into(imageViewPoster);
-//            imageViewPoster.setImageResource(movie.getPoster());
+            textView.setText(item.getName());
+            Picasso.get().load(item.getPoster()).fit().into(imageViewPoster);
+//            imageViewPoster.setImageResource(item.getPoster());
 
             imageViewPoster.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(movie, getAdapterPosition());
+                    listener.onItemClick(item, getAdapterPosition());
                 }
             });
         }
@@ -107,7 +106,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.delete_item:
-                    movies.remove(getAdapterPosition());
+                    items.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     return true;
                 default:
@@ -117,8 +116,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-            Movie movie = movies.get(this.getAdapterPosition());
-            contextMenu.setHeaderTitle(movie.getName());
+            Item item = items.get(this.getAdapterPosition());
+            contextMenu.setHeaderTitle(item.getName());
             MenuInflater inflater = activity.getMenuInflater();
             inflater.inflate(R.menu.context_menu, contextMenu);
             for (int i= 0; i < contextMenu.size(); i++) {
