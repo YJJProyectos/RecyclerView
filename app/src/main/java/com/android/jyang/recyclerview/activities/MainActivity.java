@@ -177,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyItemRemoved(position);
     }
     private void logOut() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("log", 0);
+        editor.apply();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

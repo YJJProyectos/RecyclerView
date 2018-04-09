@@ -95,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void irAMain() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("log", 1);
+        editor.apply();
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

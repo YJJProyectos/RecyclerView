@@ -21,7 +21,12 @@ public class SplashActivity extends AppCompatActivity {
         Intent intentLogin = new Intent(this, LoginActivity.class );
         Intent intentMain = new Intent(this, MainActivity.class);
 
-        if ( !mailVacio(prefs) && !pwdVacio(prefs) ) {
+//        if ( !mailVacio(prefs) && !pwdVacio(prefs) ) {
+//            startActivity(intentMain);
+//        } else {
+//            startActivity(intentLogin);
+//        }
+        if ( logeado() ) {
             startActivity(intentMain);
         } else {
             startActivity(intentLogin);
@@ -30,10 +35,23 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    private boolean mailVacio(SharedPreferences prefs) {
-        return TextUtils.isEmpty(Util.getEmailPrefs(prefs));
+    private boolean logeado() {
+
+        boolean logeado = false;
+
+        int numLog = prefs.getInt("log", 0);
+
+        if ( numLog == 1 ) {
+            logeado = true;
+        }
+
+        return logeado;
     }
-    private boolean pwdVacio(SharedPreferences prefs) {
-        return TextUtils.isEmpty(Util.getPwdPrefs(prefs));
-    }
+
+//    private boolean mailVacio(SharedPreferences prefs) {
+//        return TextUtils.isEmpty(Util.getEmailPrefs(prefs));
+//    }
+//    private boolean pwdVacio(SharedPreferences prefs) {
+//        return TextUtils.isEmpty(Util.getPwdPrefs(prefs));
+//    }
 }
