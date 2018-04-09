@@ -3,6 +3,7 @@
     package="com.android.jyang.recyclerview">
 
     <application
+        android:name=".activities.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_icono"
         android:label="@string/app_name"
@@ -21,22 +22,28 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activities.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.CustomActivity"
             android:label="Intent implicito">
             <intent-filter>
-                <action android:name = "android.intent.action.VIEW" />
-                <action android:name = "com.android.jyang.recyclerview.LAUNCH" />
-                <category android:name = "android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="com.android.jyang.recyclerview.LAUNCH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme = "http" />
-                <data android:scheme = "https" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
