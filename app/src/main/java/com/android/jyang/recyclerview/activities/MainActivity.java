@@ -1,6 +1,8 @@
 package com.android.jyang.recyclerview.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean estaCambiado = false;
     private final RecyclerView.LayoutManager layoutLinear = new LinearLayoutManager(this);
     private final RecyclerView.LayoutManager layoutGrid2 = new GridLayoutManager(this, 2);
+    private SharedPreferences prefs;
 
 
     @Override
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 //        registerForContextMenu(recyclerView);
-
+        prefs = getSharedPreferences("Datos", Context.MODE_PRIVATE);
     }
 
     private List<Item> getItems() {
@@ -113,10 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 this.recyclerView.setAdapter(this.adapter);
                 return true;
             case R.id.menu_home:
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                logOut();
+                return true;
+            case R.id.menu_logout:
+                borrarDatosSharedPreferences();
+                logOut();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -171,5 +175,15 @@ public class MainActivity extends AppCompatActivity {
     private void removeItem(int position) {
         items.remove(position);
         adapter.notifyItemRemoved(position);
+    }
+    private void logOut() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    private void borrarDatosSharedPreferences() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
     }
 }
