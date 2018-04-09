@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.jyang.recyclerview.R;
+import com.android.jyang.recyclerview.Utils.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +41,10 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Login");
         prefs = getSharedPreferences("Datos", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
-        mailView.setText(prefs.getString("mail", ""));
-        pwdView.setText(prefs.getString("pwd",""));
+//        mailView.setText(prefs.getString("mail", ""));
+//        pwdView.setText(prefs.getString("pwd",""));
+        mailView.setText(Util.getEmailPrefs(prefs));
+        pwdView.setText(Util.getPwdPrefs(prefs));
         botonLaunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

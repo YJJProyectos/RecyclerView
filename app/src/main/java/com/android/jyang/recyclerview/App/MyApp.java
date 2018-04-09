@@ -1,4 +1,4 @@
-package com.android.jyang.recyclerview.activities;
+package com.android.jyang.recyclerview.App;
 
 import android.app.Application;
 import android.os.SystemClock;
