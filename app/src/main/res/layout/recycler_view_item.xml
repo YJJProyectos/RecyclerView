@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:clickable="true"
     android:focusable="true"
-    card_view:cardBackgroundColor="#c9c8c8"
+    card_view:cardBackgroundColor="#dcd6d6"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="4dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
                 android:layout_height="match_parent"
-                android:background="#944444"
+                android:background="#4c5ca9"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/textTest"

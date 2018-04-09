@@ -9,7 +9,7 @@
         app:showAsAction="always"></item>
     <item
         android:id="@+id/cambiarGrilla"
-        android:icon="?android:attr/actionModePasteDrawable"
+        android:icon="@mipmap/ic_list"
         android:title="Cambiar Grilla"
         app:showAsAction="always"></item>
     <item
